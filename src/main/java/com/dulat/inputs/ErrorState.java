@@ -1,0 +1,10 @@
+package com.dulat.inputs;
+
+public enum ErrorState {
+    INCORRECT_COMMAND_NAME,
+    INCORRECT_FILE_NAME,
+    FEW_ARGUMENTS_ERROR,
+    TOO_MANY_ARGUMENTS_ERROR,
+    EMPTY_COMMAND_ERROR,
+    NO_ERROR
+}
