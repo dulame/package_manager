@@ -4,6 +4,7 @@ public class Validator {
     public static ErrorState validate(String s) {
         String[] args = s.split(" ");
 
+        if (args.length == 0) return ErrorState.EMPTY_COMMAND_ERROR;
         if (s.equals("")) return ErrorState.EMPTY_COMMAND_ERROR;
         if (args[0].equals("create")) return validateCreateCommand(args);
         if (args[0].equals("delete")) return validateDeleteCommand(args);

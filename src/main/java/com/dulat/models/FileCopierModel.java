@@ -23,7 +23,7 @@ public class FileCopierModel implements FileActionModel {
     }
 
     public FileCopierModel() {
-        fileCounter = new FileCounter(new HashMap<>());
+        fileCounter = new FileCounter(new HashMap<>(), null);
     }
 
     public void setFileName(String fileName) {
@@ -44,6 +44,7 @@ public class FileCopierModel implements FileActionModel {
 
     public void setMovingPath(String movingPath) {
         this.movingPath = movingPath;
+        fileCounter.setPath(movingPath);
     }
 
     @Override
@@ -57,7 +58,7 @@ public class FileCopierModel implements FileActionModel {
         }
 
         try {
-            fileName = fileCounter.count(fileName, movingPath);
+            fileName = fileCounter.count(fileName);
             Files.copy(file, Paths.get(movingPath + File.separator + fileName));
         } catch (IOException e) {
             return false;

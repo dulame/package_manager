@@ -1,7 +1,6 @@
 package com.dulat.models;
 
 import com.dulat.data.FileCounter;
-import com.dulat.settings.Configuration;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,7 +22,7 @@ public class FileCreatorModel implements FileActionModel {
     }
 
     public FileCreatorModel() {
-        fileCounter = new FileCounter(new HashMap<>());
+        fileCounter = new FileCounter(new HashMap<>(), null);
     }
 
     public void setFileName(String fileName) {
@@ -32,19 +31,27 @@ public class FileCreatorModel implements FileActionModel {
 
     public void setPath(String path) {
         this.path = path;
+        fileCounter.setPath(path);
     }
 
     @Override
     public boolean perform() {
+        boolean res = true;
+
+        if (!Files.exists(Paths.get(path))) {
+            File f = new File(path);
+            res = f.mkdirs();
+        }
+
         try {
-            fileName = fileCounter.count(fileName, path);
+            fileName = fileCounter.count(fileName);
             Path file = Paths.get(path + File.separator + fileName);
             Files.createFile(file);
         } catch (IOException e) {
             return false;
         }
 
-        return true;
+        return res;
     }
 
     @Override

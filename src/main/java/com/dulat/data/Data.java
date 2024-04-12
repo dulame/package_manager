@@ -13,8 +13,6 @@ import com.dulat.views.FileCreatorView;
 import com.dulat.views.FileDeleterView;
 import com.dulat.views.FileRenamerView;
 
-import java.util.HashMap;
-
 public class Data {
     private FileCreatorModel fileCreatorModel;
     private FileCreatorView fileCreatorView;
